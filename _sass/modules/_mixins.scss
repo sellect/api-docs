@@ -1,0 +1,101 @@
+$default-prefixes: webkit moz ms o;
+$default-time: 0.6s;
+
+@mixin prefix($property, $value, $prefixes: $default-prefixes) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: #{$value};
+  }
+  #{$property}: #{$value};
+}
+
+
+@mixin double-prefix( $property, $value, $prefixes: $default-prefixes ) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: -#{$prefix}-#{$value};
+  }
+  #{$property}: #{$value};
+}
+
+@mixin font-face($font-name, $file-name, $weight: normal, $style: normal) {
+	@font-face {
+	    font-family: #{$font-name};
+	    src: url('http://sellect.com/assets/type/#{$file-name}.eot');
+	    src: url('http://sellect.com/assetstype/#{$file-name}.eot?#iefix') format('embedded-opentype'),
+	         url('http://sellect.com/assetstype/#{$file-name}.woff') format('woff'),
+	         url('http://sellect.com/assetstype/#{$file-name}.ttf') format('truetype'),
+	         url('http://sellect.com/assetstype/#{$file-name}.svg##{$file-name}') format('svg');
+	    font-weight: $weight;
+	    font-style: $style;
+	}
+}
+
+@mixin make-transition($property, $time: $default-time, $time-func: ease) {
+	@include prefix(transition, $property $time $time-func);
+}
+
+@mixin make-transition-two($property, $property-two, $time: $default-time, $time-func: ease) {
+	@include prefix(transition, $property $time $time-func + ", " + $property-two $time $time-func);
+}
+
+@mixin make-transition-transform($time: $default-time, $time-func: ease) {
+	@include double-prefix(transition, transform $time $time-func);
+}
+
+@mixin make-transition-transform-two($property-two, $time: $default-time, $time-func: ease) {
+	@include double-prefix(transition, transform $time $time-func + ", " + $property-two $time $time-func);
+}
+
+@mixin add-transition-delay($time: $default-time) {
+	@include prefix(transition-delay, $time);
+}
+
+@mixin do-transform($property) {
+	@include prefix(transform, $property);
+}
+
+@mixin border-radius($size) {
+	@include prefix(border-radius, $size);
+}
+
+@mixin hardware-accelerate() {
+	-webkit-backface-visibility: hidden;
+	@include do-transform(translate3d(0,0,0));
+}
+
+@mixin mq($break-point) {
+	@if($break-point == laptop){
+		@media screen and (max-width:1280px){
+			@content;
+		}
+	}
+	@else if($break-point == ipad){
+		@media screen and (max-width:1024px){
+			@content;
+		}
+	}
+	@else if($break-point == tablet){
+		@media screen and (max-width:880px){
+			@content;
+		}
+	}
+	@else if($break-point == ipad-portrait){
+		@media screen and (max-width:768px){
+			@content;
+		}
+	}
+	@else if($break-point == tablet-sm){
+		@media screen and (max-width:640px){
+			@content;
+		}
+	}
+	@else if($break-point == phone){
+		@media screen and (max-width:540px){
+			@content;
+		}
+	}
+	@else if($break-point == phone-sm){
+		@media screen and (max-width:400px){
+			@content;
+		}
+	}
+}

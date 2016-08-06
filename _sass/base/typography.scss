@@ -1,0 +1,153 @@
+@include font-face('\'AvenirNextLTPro-Medium\'', 'avenirnextltpromedium', 500);
+
+%type-regular {
+  font: {
+    family: 'AvenirNextLTPro-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 500;
+    style: normal;
+  }
+}
+
+%font-default {
+  @extend %type-regular;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+
+  @include mq(tablet) {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+%font-smaller {
+  font-size: 12px;
+}
+
+%font-larger {
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.5px;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+%font-header {
+  font-size: 14px;
+
+  @include mq(tablet) {
+    font-size: 13px;
+  }
+}
+
+%font-h1 {
+  @extend %type-regular;
+  font-size: 26px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  color: $c-black;
+
+  @include mq(tablet) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+%font-h2 {
+  @extend %type-regular;
+  font-size: 22px;
+  line-height: 34px;
+  letter-spacing: -1px;
+  color: $c-black;
+
+  @include mq(tablet) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+%font-h3 {
+  @extend %type-regular;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.5px;
+  color: $c-black;
+
+  @include mq(tablet) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+%font-h4 {
+  @extend %type-regular;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: $c-black;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+%font-input {
+  @extend %type-regular;
+  font-size: 11px;
+  line-height: 27px;
+}
+
+h1 {
+  @extend %font-h1;
+}
+
+h2 {
+  @extend %font-h2;
+}
+
+h3 {
+  @extend %font-h3;
+}
+
+h4 {
+  @extend %font-h4;
+}
+
+%font-hide {
+  font-size: 0px;
+  line-height: 0px;
+  text-indent: -10000px;
+}
+
+.textContent {
+  p {
+    line-height: 26px;
+    padding-bottom: 24px;
+
+    @include mq(tablet) {
+      line-height: 20px;
+      padding-bottom: 20px;
+    }
+
+    &:last-child {
+      padding-bottom: 0px;
+    }
+
+    &.introductionParagraph {
+      @extend %font-larger;
+      padding-bottom: 30px;
+
+      @include mq(tablet) {
+        padding-bottom: 24px;
+      }
+
+      &:last-child {
+        padding-bottom: 0px;
+      }
+    }
+  }
+}

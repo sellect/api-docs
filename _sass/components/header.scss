@@ -1,0 +1,344 @@
+header, footer {
+  position: relative;
+  width: 100%;
+  height: 70px;
+
+  @include mq(tablet) {
+    height: 60px;
+  }
+
+  .cont {
+    height: 40px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    @extend %clearfix;
+
+    @include mq(tablet) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      height: 20px;
+    }
+  }
+
+  .leftNav, .mobileNav {
+    float: left;
+    @extend %clearfix;
+    width: 100%;
+
+    ul {
+      float: left;
+      @extend %clearfix;
+      position: relative;
+
+      li {
+        position: relative;
+        float: left;
+        height: 40px;
+
+        @include mq(tablet) {
+          height: 20px;
+        }
+
+        a {
+          padding: 0px ($gutter / 2);
+          height: 40px;
+          @extend %font-smaller;
+          color: $c-grey-mid;
+          line-height: 43px;
+          display: block;
+          @include make-transition(color);
+
+          @include mq(tablet) {
+            height: 20px;
+            line-height: 22px;
+          }
+
+          @include mq(phone) {
+            padding-left: 5px;
+            padding-right: 5px;
+          }
+
+          &:hover, &.current {
+            color: mix($c-grey-mid, $c-black);
+          }
+        }
+
+        &:first-child {
+          margin-left: $gutter * -0.5;
+
+          @include mq(phone) {
+            margin-left: -5px;
+          }
+        }
+      }
+    }
+  }
+
+  .rightNav {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    height: 40px;
+
+    @include mq(ipad) {
+      right: 30px;
+    }
+
+    @include mq(tablet) {
+      top: 20px;
+      height: 20px;
+    }
+
+    @include mq(phone) {
+      right: 20px;
+    }
+  }
+}
+
+header {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: $c-white;
+  z-index: 1000;
+
+  @include mq(tablet) {
+    border-bottom: 1px solid $c-grey-light;
+  }
+
+  .logo {
+    display: block;
+    width: 88px;
+    height: 22px;
+    background: {
+      image: url('http://sellect.com/assets/logo-ae81d731b899f0f2ead3231d5b7920be.svg');
+      size: 100% 100%;
+      position: center center;
+      repeat: no-repeat;
+    }
+    @include make-transition(opacity);
+    @extend %font-hide;
+    float: left;
+    margin-top: 9px;
+
+    @include mq(tablet) {
+      margin-top: -2px;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .leftNav {
+    ul {
+      padding-left: $gutter * 2;
+      margin-left: $gutter * 2;
+
+      @include mq(tablet) {
+        display: none;
+      }
+
+      &:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        width: 1px;
+        background: #d7d7d7;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #d7d7d7 50%, #ffffff 100%);
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#d7d7d7 50%,#ffffff 100%);
+        background: linear-gradient(to bottom,  #ffffff 0%,#d7d7d7 50%,#ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d7d7d7', endColorstr='#d7d7d7',GradientType=0 );
+      }
+
+      li {
+        a {
+          @extend %font-header;
+        }
+      }
+    }
+  }
+
+  .rightNav {
+    .aButton {
+      @extend %font-header;
+      height: 40px;
+      line-height: 41px;
+      padding-left: 50px;
+      padding-right: 50px;
+
+      @include mq(tablet) {
+        display: none;
+      }
+    }
+
+    .hamburger {
+      display: none;
+      width: 40px;
+      height: 40px;
+      padding: 6px;
+      @extend %border-box;
+      margin-top: -10px;
+      margin-right: -6px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      div {
+        width: 100%;
+        height: 2px;
+        background-color: $c-grey-mid;
+        margin-bottom: 2px;
+        @include make-transition-transform-two('opacity');
+
+        &:first-child {
+          margin-top: 9px;
+        }
+
+        &:last-child {
+          margin-bottom: 0px;
+        }
+      }
+
+      @include mq(tablet) {
+        display: block;
+      }
+    }
+  }
+
+  .mobileNav {
+    display: none;
+    background-color: $c-white;
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    width: 100%;
+    margin-top: 1px;
+    height: 0px;
+    overflow: hidden;
+    @include make-transition(height);
+
+    @include mq(phone) {
+      max-height: 0px;
+      height: auto;
+      @include make-transition(max-height);
+    }
+
+    &:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      height: 1px;
+      background-color: $c-grey-light;
+    }
+
+    @include mq(tablet) {
+      display: block;
+    }
+
+    .cont {
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+      @include make-transition-transform-two('opacity');
+      opacity: 0;
+      @include do-transform('translateY(-100%)');
+
+      @include mq(phone) {
+        padding: 10px 20px;
+      }
+
+      ul {
+        width: 100%;
+
+        li {
+          height: 45px;
+
+          @include mq(phone) {
+            width: 100%;
+            text-align: center;
+            margin: 0px;
+            border-bottom: 1px solid $c-grey-light;
+          }
+
+          a {
+            height: 45px;
+            @extend %font-header;
+            line-height: 47px;
+
+            &.aButton {
+              @extend %font-header;
+              color: $c-white;
+              @include make-transition(background);
+              padding-left: 50px;
+              padding-right: 50px;
+
+              @include mq(tablet-sm) {
+                padding-left: 30px;
+                padding-right: 30px;
+              }
+            }
+          }
+
+          &:last-child {
+            float: right;
+
+            @include mq(phone) {
+              float: left;
+              margin: 20px 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0px;
+    height: 2px;
+    background-color: $c-blue;
+  }
+
+  &.menuOpen {
+    .rightNav {
+      .hamburger {
+        div {
+          &:nth-child(1) {
+            @include do-transform('translateY(4px) rotate(45deg)');
+          }
+          &:nth-child(2) {
+            @include do-transform('scaleX(0)');
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            @include do-transform('translateY(-4px) rotate(-45deg)');
+          }
+        }
+      }
+    }
+    .mobileNav {
+      height: 45px;
+
+      @include mq(phone) {
+        height: auto;
+        max-height: 500px;
+      }
+
+      .cont {
+        opacity: 1;
+        @include do-transform('translateY(0px)');
+      }
+    }
+  }
+}

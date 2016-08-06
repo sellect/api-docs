@@ -1,0 +1,132 @@
+.demoOverlay {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  padding-top: 70px;
+  background-color: rgba($c-dark-blue, 0.95);
+  @extend %border-box;
+
+  @include mq(tablet) {
+    padding-top: 60px;
+  }
+
+  &, h3, .blackType, .blackType a {
+    color: $c-white;
+  }
+
+  .blackType a {
+    &:hover {
+      color: $c-blue;
+    }
+  }
+
+  h3 {
+    padding-bottom: 26px;
+  }
+
+  .frame {
+    width: 100%;
+    height: 100%;
+    @extend %border-box;
+    padding: 50px 0px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+    @include mq(phone) {
+      padding: 40px 0px;
+    }
+  }
+
+  form, .textContent, h3 {
+    padding-right: 20%;
+
+    @include mq(ipad) {
+      padding-right: 0px;
+    }
+
+    @include mq(tablet) {
+      max-width: 320px;
+      margin: 0px auto;
+    }
+  }
+
+  .col {
+    @include mq(phone) {
+      padding-bottom: 40px;
+    }
+  }
+
+  form {
+    &:after {
+      content: 'Thank you, we\'ll be in touch';
+      display: none;
+      padding: 4px 0px 3px;
+      color: $c-white;
+      @extend %font-input;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    input, select, textarea {
+      position: relative;
+      -webkit-appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      @extend %border-box;
+      @extend %font-input;
+      @include border-radius(0px);
+      margin: 0px;
+      padding: 4px 0px 3px;
+      border: none;
+      border-bottom: 1px solid $c-white;
+      background-color: transparent;
+      color: $c-white;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+
+      &[type="submit"] {
+        border-bottom: none;
+        text-align: right;
+        font-size: 14px;
+        @include make-transition(color);
+
+        &:hover {
+          cursor: pointer;
+          color: $c-blue;
+        }
+      }
+    }
+
+    textarea {
+      resize: none;
+      height: 108px;
+      padding-top: 0px;
+    }
+
+    label {
+      color: $c-white;
+      padding: 4px 0px 3px;
+      @extend %font-input;
+      display: block;
+    }
+
+    &.success {
+      input[type="submit"] {
+        display: none;
+      }
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+}
