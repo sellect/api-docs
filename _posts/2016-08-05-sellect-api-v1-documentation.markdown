@@ -8,8 +8,11 @@ categories: sellect documentation v1
 1. [Authentication](#authentication)
 2. [Errors](#errors)
 3. [Orders](#orders)
-4. [Refunds](#refunds)
-5. [Inventory](#inventory)
+4. [Shipments](#shipments)
+5. [Refunds](#refunds)
+6. [Products](#products)
+7. [Variants](#variants)
+8. [Inventory](#inventory)
 
 ## Authentication
 Authenticate your account when using the API by including your secret API key in the request. You will be provided a test and live api key by the Sellect Team. Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.
@@ -107,15 +110,15 @@ $ curl https://some-online-store.com/sellect/v1/orders/R123456789 \
         "price": "100.0",
         "quantity": 1,
         "upc": "123123121",
-        "tax": 0,
-        "vat": 0
+        "tax": 0.0,
+        "vat": 0.0
       },
       {
         "price": "100.0",
         "quantity": 1,
         "upc": "123123122",
-        "tax": 0,
-        "vat": 0
+        "tax": 0.0,
+        "vat": 0.0
       }
     ]
   }
@@ -197,15 +200,15 @@ $ curl https://some-online-store.com/sellect/v1/orders \
           "price": "100.0",
           "quantity": 1,
           "upc": "123123121",
-          "tax": 0,
-          "vat": 0
+          "tax": 0.0,
+          "vat": 0.0
         },
         {
           "price": "100.0",
           "quantity": 1,
           "upc": "123123122",
-          "tax": 0,
-          "vat": 0
+          "tax": 0.0,
+          "vat": 0.0
         }
       ]
     }
@@ -213,21 +216,21 @@ $ curl https://some-online-store.com/sellect/v1/orders \
 }
 ```
 
-## Refunds
+## Shipments
 
-### Retrieve a refund
-Retrieves the details of a refund. Supply the unique id for the refund and Sellect will return the corresponding refund information.
+### Retrieve an shipment
+Retrieves the details of an shipment. Supply the unique shipment number and Sellect will return the corresponding shipment information.
 
 **Definition**
 
 ```
-GET https://some-online-store.com/sellect/v1/refunds/{REFUND_ID}
+GET https://some-online-store.com/sellect/v1/shipments/{ORDER_NUMBER}
 ```
 
 **Example Request**
 
 ```
-$ curl https://some-online-store.com/sellect/v1/refunds/456789 \
+$ curl https://some-online-store.com/sellect/v1/shipments/R123456789 \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
 ```
 
@@ -235,29 +238,192 @@ $ curl https://some-online-store.com/sellect/v1/refunds/456789 \
 
 ```
 {
-  "sellect/transaction/refund": {
-    "id": 5,
-    "rma_number": "556226021",
-    "order_number": "TEST808828460",
-    "total_returned": 200.0,
-    "credit": 0.0,
-    "shipping_credit": 0.0,
-    "tax_credit": 0.0,
-    "return_line_items": [
+  "sellect/shipment": {
+    "id": 1,
+    "order_number": "TEST154633468",
+    "shipment_number": "12345678",
+    "state": "pending",
+    "tracking": null,
+    "line_items": [
       {
-        "amount_returned": 0.0,
-        "quantity": 0,
-        "upc": "123123123",
-        "reason": null
+        "price": "100.0",
+        "quantity": 1,
+        "upc": "123123121",
+        "tax": 0.0,
+        "vat": 0.0
       },
       {
-        "amount_returned": 0.0,
-        "quantity": 0,
-        "upc": "123123124",
-        "reason": null
+        "price": "100.0",
+        "quantity": 1,
+        "upc": "123123122",
+        "tax": 0.0,
+        "vat": 0.0
       }
     ]
   }
+}
+```
+
+### Retrieve multiple shipments
+Retrieves the details of a collection of shipments during a given time range.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
+|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
+|state|string|shipping, complete, canceled|complete|no|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/shipments
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/shipments \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -G \
+   -d start_date="2016-01-31 12:00:00 EDT" \
+   -d end_date="2016-01-31 12:00:00 EDT" \
+   -d state="shipping"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/shipments": [
+    {
+      "id": 2,
+      "order_number": "TEST448343386",
+      "shipment_number": "12345678",
+      "state": "pending",
+      "tracking": null,
+      "line_items": [
+        {
+          "price": "100.0",
+          "quantity": 1,
+          "upc": "123123123",
+          "tax": 0.0,
+          "vat": 0.0
+        },
+        {
+          "price": "100.0",
+          "quantity": 1,
+          "upc": "123123124",
+          "tax": 0.0,
+          "vat": 0.0
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Update a shipment
+Update a shipment's tracking information and/or confirm a shipment for dispatch.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|tracking|string|The tracking number used for shipping.|N/A|no|
+|ship|boolean|If true the shipment will be shipped and transactional emails will be sent|N/A|no|
+
+**Definition**
+
+```
+PUT https://some-online-store.com/sellect/v1/shipments/{ORDER_NUMBER}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/shipments/TEST448343386 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -X PUT \
+   -d ship=true \
+   -d tracking="tracking1234"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/shipment": {
+    "id": 1,
+    "order_number": "TEST443244655",
+    "shipment_number": "12345678",
+    "state": "shipped",
+    "tracking": "tracking1234",
+    "line_items": [
+      {
+        "price": "100.0",
+        "quantity": 1,
+        "upc": "123123121",
+        "tax": 0.0,
+        "vat": 0.0
+      },
+      {
+        "price": "100.0",
+        "quantity": 1,
+        "upc": "123123122",
+        "tax": 0.0,
+        "vat": 0.0
+      }
+    ]
+  }
+}
+```
+
+## Refunds
+
+### Retrieve refund(s) for a given RMA number
+Retrieves the details of refund(s) associated with a given RMA number. Supply the RMA number and Sellect will return the corresponding refund(s) information.
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/refunds/{RMA_NUMBER}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/refunds/556226021 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+```
+
+**Example Response**
+
+```
+{
+  "sellect/transaction/refunds": [
+    {
+      "id": 5,
+      "rma_number": "556226021",
+      "order_number": "TEST808828460",
+      "total_returned": 200.0,
+      "credit": 0.0,
+      "shipping_credit": 0.0,
+      "state": "pending",
+      "tax_credit": 0.0,
+      "return_line_items": [
+        {
+          "amount_returned": 0.0,
+          "quantity": 0,
+          "upc": "123123123",
+          "reason": null
+        },
+        {
+          "amount_returned": 0.0,
+          "quantity": 0,
+          "upc": "123123124",
+          "reason": null
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -299,6 +465,7 @@ $ curl https://some-online-store.com/sellect/v1/refunds \
       "total_returned": 200.0,
       "credit": 0.0,
       "shipping_credit": 0.0,
+      "state": "pending",
       "tax_credit": 0.0,
       "return_line_items": [
         {
@@ -318,7 +485,266 @@ $ curl https://some-online-store.com/sellect/v1/refunds \
 }
 ```
 
+### Approve refunds for a given RMA number
+Approves all pending refunds associated with a given RMA number.
+
+**Definition**
+
+```
+PUT https://some-online-store.com/sellect/v1/refunds/{RMA_NUMBER}/approve
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/refunds/046423181 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -X PUT
+```
+
+## Products
+
+### Retrieve a product
+Retrieves the details of a product. Supply the product ID and Sellect will return the corresponding product's information.
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/products/{PRODUCT_ID}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/products/123456789 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+```
+
+**Example Response**
+
+```
+{
+  "sellect/product": {
+    "name": "test product",
+    "description": null,
+    "variants": [
+      {
+        "upc": "123123121",
+        "product_id": 1,
+        "size": "o/s",
+        "color": "red"
+      }
+    ]
+  }
+}
+```
+
+### Retrieve multiple products
+Retrieves the details of a collection of products. If specific query information is not passed with the request all products will be returned.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|name|string|product name|N/A|no|
+|permalink|string|product permalink|N/A|no|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/products
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/products \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -G \
+   -d permalink="test-product"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/products": [
+    {
+      "name": "test product",
+      "description": null,
+      "variants": [
+        {
+          "upc": "123123121",
+          "product_id": 1,
+          "size": "o/s",
+          "color": "red"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Variants
+
+### Retrieve a variant
+Retrieves the details of a variant. Supply the variant upc and Sellect will return the corresponding variant's information.
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/variants/{VARIANT_UPC}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/variants/123456789 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+```
+
+**Example Response**
+
+```
+{
+  "sellect/variant": {
+    "upc": "123123121",
+    "product_id": 1,
+    "size": "o/s",
+    "color": "red",
+    "pricings": [
+      {
+        "currency": "usd",
+        "price": "100.0"
+      }
+    ]
+  }
+}
+```
+
+### Retrieve multiple variants
+Retrieves the details of a collection of variants. If specific query information is not passed with the request all variants will be returned.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|upc|string|variant upc|N/A|no|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/variants
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/variants \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -G \
+   -d upc="123123122"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/variants": [
+    {
+      "upc": "123123122",
+      "product_id": 2,
+      "size": "o/s",
+      "color": "red",
+      "pricings": [
+        {
+          "currency": "usd",
+          "price": "100.0"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Inventory
+
+### Retrieve an inventory unit
+Retrieves the details of an inventory unit. Supply the variant upc for the inventory unit and Sellect will return the corresponding inventory unit's information.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/inventory_units/{VARIANT_UPC}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/inventory_units/123456789 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -G \
+   -d warehouse="US"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/inventory/unit": {
+    "id": 1,
+    "upc": "123456789",
+    "quantity": 10,
+    "warehouse": "US"
+  }
+}
+```
+
+### Retrieve multiple inventory units
+Retrieves the details of a collection of inventory units. If no upcs or warehouse are passed with the request all inventory units will be returned.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|upc|string|variant upc|N/A|yes|
+|quantity|integer|quantity available|N/A|yes|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/inventory_units
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/inventory_units \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -G \
+   -d upcs[]="123456789" \
+   -d upcs[]="223456789"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/inventory/units": [
+    {
+      "id": 1,
+      "upc": "123456789",
+      "quantity": 10,
+      "warehouse": "US"
+    },
+    {
+      "id": 2,
+      "upc": "223456789",
+      "quantity": 3,
+      "warehouse": "US"
+    }
+  ]
+}
+```
 
 ### Update an inventory unit
 Updates a single inventory unit. Supply the UPC and quantity (optionally the warehouse code) for the variant to update.

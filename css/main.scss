@@ -50,6 +50,22 @@ $on-laptop:        800px;
   }
 }
 
+[id="authentication"]:before,
+[id="errors"]:before,
+[id="orders"]:before,
+[id="shipments"]:before,
+[id="refunds"]:before,
+[id="products"]:before,
+[id="variants"]:before,
+[id="inventory"]:before {
+  content: '';
+  display: block;
+  position: relative;
+  width: 0;
+  height: 70px;
+  margin-top: -70px;
+}
+
 
 @font-face {
   font-family: octicons-anchor;
