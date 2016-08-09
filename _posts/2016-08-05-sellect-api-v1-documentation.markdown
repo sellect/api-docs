@@ -126,12 +126,13 @@ $ curl https://some-online-store.com/sellect/v1/orders/R123456789 \
 ```
 
 ### Retrieve multiple orders
-Retrieves the details of a collection of orders during a given time range.
+Retrieves the details of a collection of orders during a given time range. If no start or end date is supplied then the default is all complete orders.
 
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
-|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
-|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
+|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|time_scope|string|ordered_at, created_at, updated_at|ordered_at|no|
 |state|string|shipping, complete, canceled|complete|no|
 
 **Definition**
@@ -158,7 +159,7 @@ $ curl https://some-online-store.com/sellect/v1/orders \
   "sellect/orders": [
     {
       "number": "R123456789",
-      "state": "complete",
+      "state": "shipping",
       "ordered_at": "2016-08-06T00:01:17.000Z",
       "currency": "usd",
       "gift_message": nil,
@@ -265,13 +266,14 @@ $ curl https://some-online-store.com/sellect/v1/shipments/R123456789 \
 ```
 
 ### Retrieve multiple shipments
-Retrieves the details of a collection of shipments during a given time range.
+Retrieves the details of a collection of shipments during a given time range. If no start or end date is supplied then the default is all pending shipments.
 
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
-|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
-|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
-|state|string|shipping, complete, canceled|complete|no|
+|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|time_scope|string|shipped_at, created_at, updated_at|created_at|no|
+|state|string|pending, ready, shipped, canceled|pending|no|
 
 **Definition**
 
@@ -287,7 +289,7 @@ $ curl https://some-online-store.com/sellect/v1/shipments \
    -G \
    -d start_date="2016-01-31 12:00:00 EDT" \
    -d end_date="2016-01-31 12:00:00 EDT" \
-   -d state="shipping"
+   -d state="pending"
 ```
 
 **Example Response**
@@ -428,13 +430,14 @@ $ curl https://some-online-store.com/sellect/v1/refunds/556226021 \
 ```
 
 ### Retrieve multiple refunds
-Retrieves the details of a collection of refunds during a given time range.
+Retrieves the details of a collection of refunds during a given time range. If no start or end date is supplied then the default is all processed refunds.
 
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
-|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
-|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|yes|
-|state|string|pending, processed|processed|no|
+|start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
+|time_scope|string|created_at, updated_at|created_at|no|
+|state|string|pending, processed, failed|processed|no|
 
 **Definition**
 
@@ -705,9 +708,8 @@ Retrieves the details of a collection of inventory units. If no upcs or warehous
 
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
-|upc|string|variant upc|N/A|yes|
-|quantity|integer|quantity available|N/A|yes|
-|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+|upc|string|variant upc|N/A|no|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|no|
 
 **Definition**
 
@@ -721,8 +723,7 @@ GET https://some-online-store.com/sellect/v1/inventory_units
 $ curl https://some-online-store.com/sellect/v1/inventory_units \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
    -G \
-   -d upcs[]="123456789" \
-   -d upcs[]="223456789"
+   -d upc="123456789"
 ```
 
 **Example Response**
@@ -738,9 +739,9 @@ $ curl https://some-online-store.com/sellect/v1/inventory_units \
     },
     {
       "id": 2,
-      "upc": "223456789",
+      "upc": "123456789",
       "quantity": 3,
-      "warehouse": "US"
+      "warehouse": "UK"
     }
   ]
 }
