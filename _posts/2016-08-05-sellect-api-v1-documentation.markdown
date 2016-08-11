@@ -133,7 +133,7 @@ Retrieves the details of a collection of orders during a given time range. If no
 |start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |time_scope|string|ordered_at, created_at, updated_at|ordered_at|no|
-|state|string|shipping, complete, canceled|complete|no|
+|state|string|shipping, complete, canceled|shipping|no|
 
 **Definition**
 
@@ -273,7 +273,7 @@ Retrieves the details of a collection of shipments during a given time range. If
 |start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |time_scope|string|shipped_at, created_at, updated_at|created_at|no|
-|state|string|pending, ready, shipped, canceled|pending|no|
+|state|string|pending, ready, shipped, canceled|ready|no|
 
 **Definition**
 
@@ -673,7 +673,7 @@ Retrieves the details of an inventory unit. Supply the variant upc for the inven
 
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
-|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|no|
 
 **Definition**
 
@@ -753,7 +753,7 @@ Updates a single inventory unit. Supply the UPC and quantity (optionally the war
 |parameter|type|explanation|default|required|
 |---|---|---|---|---|
 |quantity|integer|quantity available|N/A|yes|
-|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|no|
 
 **Definition**
 
@@ -791,7 +791,7 @@ Updates multiple inventory units in one request by passing a JSON object of inve
 |---|---|---|---|---|
 |upc|string|variant upc|N/A|yes|
 |quantity|integer|quantity available|N/A|yes|
-|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|false|
+|warehouse|string|warehouse code|If your shop only has one warehouse that will be the default|no|
 
 **Definition**
 
