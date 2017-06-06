@@ -586,6 +586,146 @@ $ curl https://some-online-store.com/sellect/v1/products \
 }
 ```
 
+### Create a product
+Creates a new product and returns the result.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|product|[Product](/types/product)|product object|N/A|yes|
+
+**Definition**
+
+```
+POST https://some-online-store.com/sellect/v1/products
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/products \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -H "Content-Type: application/json" \
+   -d @- << EOF
+  {
+    "product": {
+      "name": "New Product",
+      "sku": "SOMESKU",
+      "variants_attributes": [
+        {
+          "upc": "12345",
+          "description": "This is the first variant",
+          "pricings_attributes": [
+            {
+              "currency": "USD",
+              "price": "69.67"
+            }
+          ]
+        },
+        {
+          "upc": "123456",
+          "description": "This is another variant",
+          "color": "red",
+          "pricings_attributes": [
+            {
+              "currency": "USD",
+              "price": "42.00"
+            }
+          ]
+        }
+      ],
+      "images_attributes": [
+        {
+          "color": "red",
+          "attachment_remote_url": "https://example.com/images/123456.jpeg"
+        }
+      ]
+    }
+  }
+EOF
+
+```
+
+**Example Response**
+
+```json
+{
+  "sellect/product": {
+    "name": "New Product",
+    "description": null,
+    "variants": [
+      {
+        "upc": "12345",
+        "product_id": 1,
+        "size": null,
+        "color": null
+      },
+      {
+        "upc": "123456",
+        "product_id": 1,
+        "size": null,
+        "color": "red"
+      }
+    ]
+  }
+}
+```
+
+### Update a product
+Update an existing product. Note that nested resources will be updated if an id
+is specified, otherwise a new one will be created.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|product|[Product](/types/product)|product object|N/A|yes|
+
+**Definition**
+
+```
+PUT https://some-online-store.com/sellect/v1/products/{PRODUCT_ID}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/products/1 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
+   -X PUT \
+   -H "Content-Type: application/json" \
+   -d @- << EOF
+  {
+    "product": {
+      "variants_attributes": [
+        {
+          "id": 1,
+          "description": "Updated variant description"
+        }
+      ]
+    }
+  }
+EOF
+
+```
+
+**Example Response**
+
+```json
+{
+  "sellect/product": {
+    "name": "Some Product",
+    "description": null,
+    "variants": [
+      {
+        "upc": "12345",
+        "product_id": 1,
+        "size": null,
+        "color": null
+      }
+    ]
+  }
+}
+```
+
+
 ## Variants
 
 ### Retrieve a variant
