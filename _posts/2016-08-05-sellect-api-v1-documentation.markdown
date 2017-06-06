@@ -589,9 +589,7 @@ $ curl https://some-online-store.com/sellect/v1/products \
 ### Create a product
 Creates a new product and returns the result.
 
-|parameter|type|explanation|default|required|
-|---|---|---|---|---|
-|product|[Product](/types/product)|product object|N/A|yes|
+{% include product_attributes.markdown %}
 
 **Definition**
 
@@ -674,9 +672,7 @@ EOF
 Update an existing product. Note that nested resources will be updated if an id
 is specified, otherwise a new one will be created.
 
-|parameter|type|explanation|default|required|
-|---|---|---|---|---|
-|product|[Product](/types/product)|product object|N/A|yes|
+{% include product_attributes.markdown %}
 
 **Definition**
 
