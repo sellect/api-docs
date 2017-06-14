@@ -132,7 +132,7 @@ Retrieves the details of a collection of orders during a given time range. If no
 |---|---|---|---|---|
 |start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
-|time_scope|string|ordered_at, created_at, updated_at|ordered_at|no|
+|time_scope|string|ordered_at, created_at, updated_at|created_at|no|
 |state|string|shipping, complete, canceled|shipping|no|
 
 **Definition**
