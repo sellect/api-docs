@@ -69,7 +69,9 @@ $ curl https://some-online-store.com/sellect/v1/orders/R123456789 \
   "sellect/order": {
     "number": "R123456789",
     "state": "complete",
-    "ordered_at": "2016-08-06T00:01:17.000Z",
+    "ordered_at": "2017-06-09 15:26:20 UTC",
+    "created_at": "2017-06-09 15:21:48 UTC",
+    "updated_at": "2017-06-13 15:50:30 UTC",
     "currency": "usd",
     "gift_message": nil,
     "invoice_url": "http://test.sellect.com/orders/TEST101206324/invoice/4df790c48bbf867f2713a5f8c0696265",
@@ -132,7 +134,7 @@ Retrieves the details of a collection of orders during a given time range. If no
 |---|---|---|---|---|
 |start_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
 |end_date|string|YYYY-MM-DD HH:MM:SS TZ|N/A|no|
-|time_scope|string|ordered_at, created_at, updated_at|ordered_at|no|
+|time_scope|string|ordered_at, created_at, updated_at|created_at|no|
 |state|string|shipping, complete, canceled|shipping|no|
 
 **Definition**
@@ -147,8 +149,8 @@ GET https://some-online-store.com/sellect/v1/orders
 $ curl https://some-online-store.com/sellect/v1/orders \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
    -G \
-   -d start_date="2016-01-31 12:00:00 EDT" \
-   -d end_date="2016-01-31 12:00:00 EDT" \
+   -d start_date="2016-01-10%2001%3A00%3A00%20EDT" \
+   -d end_date="2017-06-13%2011%3A50%3A30%20EDT" \
    -d state="shipping"
 ```
 
@@ -160,7 +162,9 @@ $ curl https://some-online-store.com/sellect/v1/orders \
     {
       "number": "R123456789",
       "state": "shipping",
-      "ordered_at": "2016-08-06T00:01:17.000Z",
+      "ordered_at": "2017-06-09 15:26:20 UTC",
+      "created_at": "2017-06-09 15:21:48 UTC",
+      "updated_at": "2017-06-13 15:50:30 UTC",
       "currency": "usd",
       "gift_message": nil,
       "invoice_url": "http://test.sellect.com/orders/TEST101206324/invoice/4df790c48bbf867f2713a5f8c0696265",
@@ -287,8 +291,8 @@ GET https://some-online-store.com/sellect/v1/shipments
 $ curl https://some-online-store.com/sellect/v1/shipments \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
    -G \
-   -d start_date="2016-01-31 12:00:00 EDT" \
-   -d end_date="2016-01-31 12:00:00 EDT" \
+   -d start_date="2016-01-31%2012%3A00%3A00%20EDT" \
+   -d end_date="2016-01-31%2012%3A00%3A00%20EDT" \
    -d state="pending"
 ```
 
@@ -451,8 +455,8 @@ GET https://some-online-store.com/sellect/v1/refunds
 $ curl https://some-online-store.com/sellect/v1/refunds \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
    -G \
-   -d start_date="2016-01-31 12:00:00 EDT" \
-   -d end_date="2016-01-31 12:00:00 EDT" \
+   -d start_date="2016-01-31%2012%3A00%3A00%20EDT" \
+   -d end_date="2016-01-31%2012%3A00%3A00%20EDT" \
    -d state="pending"
 ```
 
