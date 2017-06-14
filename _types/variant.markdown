@@ -17,4 +17,4 @@ A product variant.
 |published|boolean|whether variant should appear on website|true|no|
 |color|string|color of variant|N/A|no|
 |size|string|size of variant|N/A|no|
-|pricings_attributes|[Pricing[]](/types/pricing)|array of price objects|N/A|no|
+|pricings_attributes|[Pricing[]](pricing)|array of price objects|N/A|no|
