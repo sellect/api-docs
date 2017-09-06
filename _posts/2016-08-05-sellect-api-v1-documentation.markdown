@@ -122,6 +122,14 @@ $ curl https://some-online-store.com/sellect/v1/orders/R123456789 \
         "tax": 0.0,
         "vat": 0.0
       }
+    ],
+    "sellect/giftcard_transactions": [
+      {
+        "id": 2,
+        "number": "123456",
+        "amount": "200.0",
+        "type": "Sellect::Transaction::GiftcardAuthorization"
+      }
     ]
   }
 }
