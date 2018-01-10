@@ -972,7 +972,6 @@ $ curl https://some-online-store.com/sellect/v1/inventory_units/bulk_update \
 }
 ```
 
-
 ## Product Categories
 
 ### Retrieve a product category
