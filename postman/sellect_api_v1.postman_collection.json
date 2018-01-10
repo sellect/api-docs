@@ -1,0 +1,441 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Sellect API v1",
+		"_postman_id": "75ca25a2-a28b-2347-70c0-ac69274c8137",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve an order",
+			"request": {
+				"url": "{{host}}/sellect/v1/orders/{{order_number}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of an order. Supply the unique order number and Sellect will return the corresponding order information."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve multiple orders",
+			"request": {
+				"url": {
+					"raw": "{{host}}/sellect/v1/orders",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sellect",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "complete",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "end_date",
+							"value": "2017-06-14 11:50:30 EDT",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a collection of orders during a given time range. If no start or end date is supplied then the default is all complete orders."
+			},
+			"response": [
+				{
+					"id": "aa35fd92-4c67-4800-8010-74c0f19128c9",
+					"name": "Complete Orders",
+					"originalRequest": {
+						"url": "https://zanella-beta.kingandpartners.com/sellect/v1/orders?state=complete",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic c2VsbGVjdF90ZXN0X2I4N2Y0NTU5OGQzY2FhNWMzMWNmYjgzZjo=",
+								"enabled": true
+							}
+						],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Cache-Control",
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate",
+							"description": ""
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Thu, 18 Aug 2016 20:44:17 GMT",
+							"description": ""
+						},
+						{
+							"name": "ETag",
+							"key": "ETag",
+							"value": "W/\"7d3334c86ea3eacab0feb0a49088e794\"",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "nginx",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						},
+						{
+							"name": "X-Content-Type-Options",
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"description": ""
+						},
+						{
+							"name": "X-Frame-Options",
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN",
+							"description": ""
+						},
+						{
+							"name": "X-Request-Id",
+							"key": "X-Request-Id",
+							"value": "d45ce60f-4d27-45ae-8ce6-25a499c6d856",
+							"description": ""
+						},
+						{
+							"name": "X-Runtime",
+							"key": "X-Runtime",
+							"value": "0.078787",
+							"description": ""
+						},
+						{
+							"name": "X-XSS-Protection",
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "126",
+					"body": "{\"sellect/orders\":[{\"number\":\"TEST776848788\",\"state\":\"complete\",\"ordered_at\":\"2016-08-11T17:40:01.000Z\",\"currency\":\"usd\",\"gift_message\":null,\"invoice_url\":\"http://zanella-beta.kingandpartners.com/orders/TEST776848788/invoice/8701a4283ffe4b31e16bbec1fc476897\",\"email\":\"test@test.com\",\"tax\":13.31,\"shipping_discount\":0.0,\"item_discount\":0.0,\"warehouse\":\"vsr\",\"shipping_address\":{\"first_name\":\"Test\",\"last_name\":\"Test\",\"address1\":\"123 123 St.\",\"address2\":\"\",\"city\":\"New York\",\"state_name\":\"New York\",\"zipcode\":\"10012\",\"phone\":\"+1234567890\",\"country\":\"US\"},\"billing_address\":{\"first_name\":\"Test\",\"last_name\":\"Test\",\"address1\":\"123 123 St.\",\"address2\":\"\",\"city\":\"New York\",\"state_name\":\"New York\",\"zipcode\":\"10012\",\"phone\":\"+1234567890\",\"country\":\"US\"},\"shipping_method\":{\"name\":\"Free Shipping\",\"carrier\":\"ups\",\"rate\":0.0},\"line_items\":[{\"price\":\"150.0\",\"quantity\":1,\"upc\":\"1234567890\",\"tax\":13.3125,\"vat\":0.0}]}]}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve multiple shipments",
+			"request": {
+				"url": "{{host}}/sellect/v1/shipments",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a collection of shipments during a given time range. If no start or end date is supplied then the default is all pending shipments."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve multiple refunds",
+			"request": {
+				"url": "{{host}}/sellect/v1/refunds",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a collection of refunds during a given time range. If no start or end date is supplied then the default is all processed refunds."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve multiple products",
+			"request": {
+				"url": "{{host}}/sellect/v1/products",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2ExOGMzODM0NTI3NmZlMDMwODI2OWZlMjo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a collection of products. If specific query information is not passed with the request all products will be returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a product",
+			"request": {
+				"url": "{{host}}/sellect/v1/products/{{product_id}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a product. Supply the product ID and Sellect will return the corresponding product’s information."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve multiple variants",
+			"request": {
+				"url": "{{host}}/sellect/v1/variants",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Retrieves the details of a collection of variants. If specific query information is not passed with the request all variants will be returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve multiple inventory units",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "{{api_key}}",
+						"password": "",
+						"showPassword": false
+					}
+				},
+				"url": "{{host}}/sellect/v1/inventory_units",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Retrieves the details of a collection of inventory units. If no upcs or warehouse are passed with the request all inventory units will be returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Update an inventory unit",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "{{api_key}}",
+						"password": "",
+						"showPassword": false
+					}
+				},
+				"url": "{{host}}/sellect/v1/inventory_units/841229129574",
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Updates a single inventory unit. Supply the UPC and quantity (optionally the warehouse code) for the variant to update."
+			},
+			"response": []
+		},
+		{
+			"name": "Bulk Update Inventory",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "{{api_key}}",
+						"password": "",
+						"showPassword": false
+					}
+				},
+				"url": "{{host}}/sellect/v1/inventory_units/bulk_update",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"inventory_units\": [\n\t\t{\"warehouse\":\"vsr\",\"quantity\": 0,\"upc\": \"841229129819\"},\n\t\t{\"warehouse\":\"vsr\",\"quantity\": 0,\"upc\": \"841229130839\"}\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve an inventory unit",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "{{api_key}}",
+						"password": "",
+						"showPassword": false
+					}
+				},
+				"url": "{{host}}/sellect/v1/inventory_units/841229129574",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update a shipment",
+			"request": {
+				"url": "{{host}}/sellect/v1/shipments/TEST856022843",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2M5MDFmYjVmMjUzM2I1NmUzYjExMmYwMDo=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ship",
+							"value": "true",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tracking",
+							"value": "test1234",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "shipped_at",
+							"value": "2017-09-05 12:00:00 EDT",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve produt categories",
+			"request": {
+				"url": "{{host}}/sellect/v1/product_categories",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2ExOGMzODM0NTI3NmZlMDMwODI2OWZlMjo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a product category",
+			"request": {
+				"url": "{{host}}/sellect/v1/product_categories/{{product_category_id}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2ExOGMzODM0NTI3NmZlMDMwODI2OWZlMjo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a user",
+			"request": {
+				"url": "{{host}}/sellect/v1/users/{{user_id}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2VsbGVjdF90ZXN0X2ExOGMzODM0NTI3NmZlMDMwODI2OWZlMjo=",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
