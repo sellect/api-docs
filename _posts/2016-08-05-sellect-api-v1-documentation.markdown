@@ -5,6 +5,7 @@ date:   2016-08-05 17:34:21 -0400
 categories: sellect documentation v1
 ---
 
+0. [Test Project](#test-project)
 1. [Authentication](#authentication)
 2. [Errors](#errors)
 3. [Orders](#orders)
@@ -15,6 +16,11 @@ categories: sellect documentation v1
 8. [Inventory](#inventory)
 9. [Product Categories](#product-categories)
 10. [Users](#users)
+
+## Test Project
+To get started in making RESTful requests with Postman please download the latest collection [here](../api-docs/postman/sellect_api_v1.postman_collection.json), and import the collection into [postman](https://www.getpostman.com/).
+
+In order to test either a locally running app, one that is currently in Beta or in production, please contact your account manager who can provide you with your API credentials.
 
 ## Authentication
 Authenticate your account when using the API by including your secret API key in the request. You will be provided a test and live api key by the Sellect Team. Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.
