@@ -40,6 +40,10 @@ $on-laptop:        800px;
 @import './components/header';
 @import './components/footer';
 
+h1, h2, h3 {
+  padding: 20px 0;
+}
+
 .highlighter-rouge .highlight {
   background: #f5f5f5;
 }
@@ -59,7 +63,9 @@ $on-laptop:        800px;
 [id="refunds"]:before,
 [id="products"]:before,
 [id="variants"]:before,
-[id="inventory"]:before {
+[id="inventory"]:before,
+[id="product-categories"]:before,
+[id="users"]:before {
   content: '';
   display: block;
   position: relative;
