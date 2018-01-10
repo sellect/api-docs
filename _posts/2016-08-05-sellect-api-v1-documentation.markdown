@@ -13,6 +13,8 @@ categories: sellect documentation v1
 6. [Products](#products)
 7. [Variants](#variants)
 8. [Inventory](#inventory)
+9. [Product Categories](#product-categories)
+10. [Users](#users)
 
 ## Authentication
 Authenticate your account when using the API by including your secret API key in the request. You will be provided a test and live api key by the Sellect Team. Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.
@@ -965,6 +967,155 @@ $ curl https://some-online-store.com/sellect/v1/inventory_units/bulk_update \
       "upc": "223456789",
       "quantity": 3,
       "warehouse": "US"
+    }
+  ]
+}
+```
+
+
+## Product Categories
+
+### Retrieve a product category
+Retrieves the details of a product category. Supply the product category ID and Sellect will return the corresponding product category's information.
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/product_categories/{PRODUCT_CATEGORIES_ID}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/product_categories/123456789 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+   -G \
+   -d permalink="test-category""
+```
+
+**Example Response**
+
+```
+{
+  "sellect/product_category" : {
+    "id": 1,
+    "name": "test category",
+    "presentation": "test category",
+    "permalink": "test-category",
+    "parent_id": nil,
+    "products": []
+  }
+}
+```
+
+### Retrieve multiple product categories
+Retrieves the details of a collection of product categories.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|name|string|product category name|N/A|no|
+|permalink|string|product category permalink|N/A|no|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/product_categories
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/product_categories \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+   -G \
+   -d permalink="test-category"
+```
+
+**Example Response**
+
+```
+{
+  "sellect/product_categories" : [
+    {
+      "id": 2,
+      "name": "test category",
+      "presentation": "test category",
+      "permalink": "test-category",
+      "parent_id": nil,
+      "products": []
+    }
+  ]
+}
+```
+
+
+## Users
+
+### Retrieve a user
+Retrieves the details of a user. Supply the user ID and Sellect will return the corresponding user's information.
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/users/{USER_ID}
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/users/123456789 \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+```
+
+**Example Response**
+
+```
+{
+  "sellect/user": {
+    "id": 1,
+    "first_name": "test",
+    "last_name": "account",
+    "phone": 9999999999,
+    "email": "testaccount@test.com",
+    "created_at": "2017-11-09 15:07:24 UTC",
+    "updated_at": "2017-11-09 15:07:24 UTC"
+  }
+}
+```
+
+### Retrieve multiple users
+Retrieves the details of a collection of users. If specific query information regarding a user's role is not passed with the request all users will be returned.
+
+|parameter|type|explanation|default|required|
+|---|---|---|---|---|
+|scope|string|user role|N/A|no|
+
+**Definition**
+
+```
+GET https://some-online-store.com/sellect/v1/users
+```
+
+**Example Request**
+
+```
+$ curl https://some-online-store.com/sellect/v1/users \
+   -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK:
+```
+
+**Example Response**
+
+```
+{
+  "sellect/guest_users" : [
+    {
+      "id": 77,
+      "first_name": "test",
+      "last_name": "account",
+      "phone": null,
+      "email": "tester@test.com",
+      "created_at": "2017-12-06 18:32:49 UTC",
+      "updated_at": "2017-12-06 18:32:49 UTC"
     }
   ]
 }
