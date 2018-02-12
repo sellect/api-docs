@@ -343,6 +343,7 @@ Update a shipment's tracking information and/or confirm a shipment for dispatch.
 |---|---|---|---|---|
 |tracking|string|The tracking number used for shipping.|N/A|no|
 |ship|boolean|If true the shipment will be shipped and transactional emails will be sent|N/A|no|
+|shipped_at|timestamp (in format YYYY-MM-DD HH:MM:SS TZ)|Order ship time|Time when shipment was set as shipped|no|
 
 **Definition**
 
@@ -357,7 +358,8 @@ $ curl https://some-online-store.com/sellect/v1/shipments/TEST448343386 \
    -u sellect_test_4gh8KKUIcCEOkCRKQQNOFAiK: \
    -X PUT \
    -d ship=true \
-   -d tracking="tracking1234"
+   -d tracking="tracking1234" \
+   -d shipped_at="2017-06-05 04:03:02 UTC"
 ```
 
 **Example Response**
@@ -370,6 +372,8 @@ $ curl https://some-online-store.com/sellect/v1/shipments/TEST448343386 \
     "shipment_number": "12345678",
     "state": "shipped",
     "tracking": "tracking1234",
+    "shipped_at": "2017-06-05T04:03:02.000Z",
+    "updated_at": "2017-09-07T14:03:34.130Z",
     "line_items": [
       {
         "price": "100.0",
@@ -385,7 +389,12 @@ $ curl https://some-online-store.com/sellect/v1/shipments/TEST448343386 \
         "tax": 0.0,
         "vat": 0.0
       }
-    ]
+    ],
+    "shipping_method": {
+      "name": "Economy (6-10 business days. PO box & home delivery)",
+      "carrier": "fedex",
+      "rate": 4.95
+    }
   }
 }
 ```
