@@ -558,6 +558,13 @@ $ curl https://some-online-store.com/sellect/v1/products/123456789 \
         "size": "o/s",
         "color": "red"
       }
+    ],
+    "images": [
+      {
+        "position": 1,
+        "alt": "front",
+        "attachment_url": "https://example.com/images/test-product-image.jpg"
+      }
     ]
   }
 }
@@ -683,6 +690,13 @@ EOF
         "product_id": 1,
         "size": null,
         "color": "red"
+      }
+    ],
+    "images": [
+      {
+        "position": 1,
+        "alt": null,
+        "attachment_url": "https://example.com/images/new-product-image.jpg"
       }
     ]
   }
